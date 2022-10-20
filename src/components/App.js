@@ -1,51 +1,15 @@
 import React from 'react';
-import headerLogo from './images/logo-place.svg';
-import userDefaultAvatar from './images/user-avatar.png';
+import Header from './Header';
+import Main from "./Main";
+import Footer from './Footer';
+import userDefaultAvatar from '../images/user-avatar.png';
 
 function App() {
   return (
     <body className="page">
-      <header className="header page__header">
-        <img className="header__logo"
-             src={headerLogo}
-             alt="Логотип с картой России"
-        />
-      </header>
-
-      <main className="content page__content">
-
-        <section className="profile content__profile">
-          <div className="profile__card">
-            <img className="profile__avatar"
-                 src={userDefaultAvatar}
-                 alt="Ваш аватар"
-            />
-            <button className="profile__avatar-button"></button>
-            <div className="profile__info">
-              <h1 className="profile__title">Жак-Ив</h1>
-              <button className="profile__edit-button"
-                      type="button"
-                      aria-label="Редактировать профиль">
-              </button>
-              <p className="profile__description">Исследователь</p>
-            </div>
-
-          </div>
-          <button className="profile__add-button"
-                  type="button"
-                  aria-label="Добавить фото">
-          </button>
-        </section>
-
-        <section className="elements content__elements">
-          <ul className="elements__list"></ul>
-        </section>
-
-      </main>
-
-      <footer className="footer page__footer">
-        <p className="footer__copyright">&copy; 2022 Created by KolobOK</p>
-      </footer>
+      <Header />
+      <Main />
+      <Footer />
 
       /попап добавления карточки-->
       <div className="popup popup_type_add-card">
