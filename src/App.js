@@ -1,13 +1,13 @@
 import React from 'react';
-
-import './App.css';
+import headerLogo from './images/logo-place.svg';
+import userDefaultAvatar from './images/user-avatar.png';
 
 function App() {
   return (
     <body className="page">
       <header className="header page__header">
         <img className="header__logo"
-             src="<%=require('./images/logo-place.svg')%>"
+             src={headerLogo}
              alt="Логотип с картой России"
         />
       </header>
@@ -17,17 +17,17 @@ function App() {
         <section className="profile content__profile">
           <div className="profile__card">
             <img className="profile__avatar"
-                 src="<%=require('./images/user-avatar.png')%>"
+                 src={userDefaultAvatar}
                  alt="Ваш аватар"
             />
             <button className="profile__avatar-button"></button>
             <div className="profile__info">
-              <h1 className="profile__title"></h1>
+              <h1 className="profile__title">Жак-Ив</h1>
               <button className="profile__edit-button"
                       type="button"
                       aria-label="Редактировать профиль">
               </button>
-              <p className="profile__description"></p>
+              <p className="profile__description">Исследователь</p>
             </div>
 
           </div>
