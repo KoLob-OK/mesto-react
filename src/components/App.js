@@ -7,16 +7,36 @@ import ImagePopup from "./ImagePopup";
 
 
 function App() {
+    const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+    const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
+    const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+
+    function handleEditAvatarClick() {
+        setIsEditAvatarPopupOpen(true);
+    }
+
+    function handleEditProfileClick() {
+        setIsEditProfilePopupOpen(true);
+    }
+
+    function handleAddPlaceClick() {
+        setIsAddPlacePopupOpen(true);
+    }
+
   return (
     <body className="page">
       <Header />
-      <Main />
+      <Main onEditAvatar={handleEditAvatarClick}
+            onEditProfile={handleEditProfileClick}
+            onAddPlace={handleAddPlaceClick}
+      />
       <Footer />
 
       /попап добавления карточки-->
       <PopupWithForm
           name="add-card"
           title="Новое место"
+          isOpen={isAddPlacePopupOpen}
           children={(
               <fieldset className="form__set">
 
@@ -53,6 +73,7 @@ function App() {
       <PopupWithForm
           name="profile-edit"
           title="Редактировать профиль"
+          isOpen={isEditProfilePopupOpen}
           children={(
               <fieldset className="form__set">
 
@@ -92,6 +113,7 @@ function App() {
       <PopupWithForm
           name="update-avatar"
           title="Обновить аватар"
+          isOpen={isEditAvatarPopupOpen}
           children={(
               <fieldset className="form__set">
                   <input
