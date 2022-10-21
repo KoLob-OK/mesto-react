@@ -4,18 +4,29 @@ import api from "../utils/api";
 // import {selectors} from "../utils/constants";
 
 function Main(props) {
-    const [userAvatar, setUserAvatar] = React.useState(userDefaultAvatar);
-    const [userName, setUserName] = React.useState('');
-    const [userDescription, setUserDescription] = React.useState('');
+    const [userAvatar, setUserAvatar] = React.useState();
+    const [userName, setUserName] = React.useState();
+    const [userDescription, setUserDescription] = React.useState();
+    const [cards, setCards] = React.useState([]);
 
     React.useEffect(() => {
-        api.getUserData()
-            .then((data) => {
+        api
+            .getUserData()
+            .then(data => {
                 setUserAvatar(data.avatar);
                 setUserName(data.name);
                 setUserDescription(data.about);
             })
-            .catch((err) => {
+            .catch(err => {
+                console.log(`Ошибка: ${err}`);
+            });
+
+        api
+            .getInitialCards()
+            .then(data => {
+                setCards(data);
+            })
+            .catch(err => {
                 console.log(`Ошибка: ${err}`);
             });
     }, []);
@@ -28,7 +39,7 @@ function Main(props) {
 
                     <div className="profile__avatar">
                         <div className="profile__avatar-img"
-                             style={{backgroundImage: `url(${userAvatar})`}}>
+                             style={{ backgroundImage: `url(${userAvatar || userDefaultAvatar})`}}>
                         </div>
                     </div>
 
@@ -58,7 +69,35 @@ function Main(props) {
             </section>
 
             <section className="elements content__elements">
-                <ul className="elements__list"></ul>
+                <ul className="elements__list">
+                    {cards.map(card => {
+                        return (
+                            <li className="element"
+                                key={card._id}>
+                                <div className="element__image"
+                                     style={{ backgroundImage: `url(${card.link})` }}
+                                     alt={card.name}>
+                                </div>
+                                <div className="element__wrapper">
+                                    <h2 className="element__title">{card.name}</h2>
+                                    <div className="element__likes">
+                                        <button className="element__like-button"
+                                                type="button"
+                                                aria-label="Нравится">
+                                        </button>
+                                        <span className="element__likes-counter">
+                                            {card.likes.length}
+                                        </span>
+                                    </div>
+                                </div>
+                                <button className="element__del-button"
+                                        type="button"
+                                        aria-label="Удалить">
+                                </button>
+                            </li>
+                        );
+                    })}
+                </ul>
             </section>
 
         </main>
