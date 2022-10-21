@@ -23,6 +23,12 @@ function App() {
         setIsAddPlacePopupOpen(true);
     }
 
+    function closeAllPopups() {
+        setIsEditAvatarPopupOpen(false);
+        setIsEditProfilePopupOpen(false);
+        setIsAddPlacePopupOpen(false);
+    }
+
   return (
     <body className="page">
       <Header />
@@ -37,6 +43,7 @@ function App() {
           name="add-card"
           title="Новое место"
           isOpen={isAddPlacePopupOpen}
+          onClose={closeAllPopups}
           children={(
               <fieldset className="form__set">
 
@@ -74,6 +81,7 @@ function App() {
           name="profile-edit"
           title="Редактировать профиль"
           isOpen={isEditProfilePopupOpen}
+          onClose={closeAllPopups}
           children={(
               <fieldset className="form__set">
 
@@ -114,6 +122,7 @@ function App() {
           name="update-avatar"
           title="Обновить аватар"
           isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
           children={(
               <fieldset className="form__set">
                   <input
@@ -135,6 +144,8 @@ function App() {
       <PopupWithForm
           name="del-card"
           title="Вы уверены?"
+          isOpen={false}
+          onClose={closeAllPopups}
           children={(
               <button className="form__submit" type="submit">Да</button>
           )}
