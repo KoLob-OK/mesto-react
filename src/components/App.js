@@ -32,9 +32,10 @@ function App() {
   return (
     <body className="page">
       <Header />
-      <Main onEditAvatar={handleEditAvatarClick}
-            onEditProfile={handleEditProfileClick}
-            onAddPlace={handleAddPlaceClick}
+      <Main
+          onEditAvatar={handleEditAvatarClick}
+          onEditProfile={handleEditProfileClick}
+          onAddPlace={handleAddPlaceClick}
       />
       <Footer />
 
