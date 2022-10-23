@@ -20,16 +20,9 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/KoLob-OK/mesto-react.git"
-  },
   "author": "KolobOK",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/KoLob-OK/mesto-react/issues"
-  },
-  "homepage": "https://github.com/KoLob-OK/mesto-react#readme",
+  "homepage": "https://github.com/KoLob-OK/mesto-react",
   "eslintConfig": {
     "extends": [
       "react-app",
