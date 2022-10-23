@@ -22,8 +22,8 @@
   },
   "author": "KolobOK",
   "license": "ISC",
-  "homepage": "https://github.com/KoLob-OK/mesto-react",
-  "eslintConfig": {
+  "homepage": "http://KoLob-OK.github.io/mesto-react",
+  "eslintConfig",: {
     "extends": [
       "react-app",
       "react-app/jest"
