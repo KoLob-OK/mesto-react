@@ -46,7 +46,7 @@ function App() {
             />
             <Footer/>
 
-            /попап добавления карточки-->
+            /попап добавления карточки
             <PopupWithForm
                 name="add-card"
                 title="Новое место"
@@ -63,7 +63,7 @@ function App() {
                         maxLength="30"
                         value=""
                         required/>
-                    <span id="name-error" className="form__input-error"></span>
+                    <span id="name-error" className="form__input-error"/>
 
                     <input
                         className="form__input form__input_type_link"
@@ -74,7 +74,7 @@ function App() {
                         value=""
                         required
                     />
-                    <span id="link-error" className="form__input-error"></span>
+                    <span id="link-error" className="form__input-error"/>
 
                     <button className="form__submit" type="submit">Создать</button>
 
@@ -99,7 +99,7 @@ function App() {
                         value=""
                         required
                     />
-                    <span id="username-error" className="form__input-error"></span>
+                    <span id="username-error" className="form__input-error"/>
 
                     <input
                         className="form__input form__input_type_job"
@@ -112,7 +112,7 @@ function App() {
                         value=""
                         required
                     />
-                    <span id="job-error" className="form__input-error"></span>
+                    <span id="job-error" className="form__input-error"/>
 
                     <button className="form__submit" type="submit">Сохранить</button>
 
@@ -135,7 +135,7 @@ function App() {
                         value=""
                         required
                     />
-                    <span id="avatar-error" className="form__input-error"></span>
+                    <span id="avatar-error" className="form__input-error"/>
                     <button className="form__submit" type="submit">Сохранить</button>
                 </fieldset>
             </PopupWithForm>
