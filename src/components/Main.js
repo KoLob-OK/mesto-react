@@ -4,7 +4,8 @@ import api from "../utils/api";
 import Card from "./Card";
 // import {selectors} from "../utils/constants";
 
-function Main(props) {          //можно сделать деструктуризацию (function Main(onEditAvatar, onEditProfile, onAddPlace){})
+function Main(props) {
+    //можно сделать деструктуризацию (function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }){})
     const [userAvatar, setUserAvatar] = React.useState();
     const [userName, setUserName] = React.useState();
     const [userDescription, setUserDescription] = React.useState();
@@ -40,7 +41,7 @@ function Main(props) {          //можно сделать деструктур
 
                     <div className="profile__avatar">
                         <div className="profile__avatar-img"
-                             style={{ backgroundImage: `url(${userAvatar || userDefaultAvatar})`}}>
+                             style={{backgroundImage: `url(${userAvatar || userDefaultAvatar})`}}>
                         </div>
                     </div>
 
@@ -74,7 +75,9 @@ function Main(props) {          //можно сделать деструктур
                     {cards.map(card => {
                         return (
                             <Card
+                                key={card._id}
                                 card={card}
+                                onCardClick={props.onCardClick}
                             />
                         )
                     })}

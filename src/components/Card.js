@@ -1,22 +1,27 @@
 import React from 'react';
 
-function Card({card}) {
+function Card(props) {
+    //можно сделать деструктуризацию (function Card({ card, onClose }){})
+    function handleCardClick() {
+        props.onCardClick(props.card);
+    }
+
     return (
-        <li className="element"
-            key={card._id}>
+        <li className="element">
             <div className="element__image"
-                 style={{ backgroundImage: `url(${card.link})` }}
-                 alt={card.name}>
+                 style={{backgroundImage: `url(${props.card.link})`}}
+                 alt={props.card.name}
+                 onClick={handleCardClick}>
             </div>
             <div className="element__wrapper">
-                <h2 className="element__title">{card.name}</h2>
+                <h2 className="element__title">{props.card.name}</h2>
                 <div className="element__likes">
                     <button className="element__like-button"
                             type="button"
                             aria-label="Нравится">
                     </button>
                     <span className="element__likes-counter">
-                                            {card.likes.length}
+                                            {props.card.likes.length}
                                         </span>
                 </div>
             </div>
@@ -28,4 +33,4 @@ function Card({card}) {
     );
 }
 
-export default Card
+export default Card;
