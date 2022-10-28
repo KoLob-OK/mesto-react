@@ -2,27 +2,13 @@ import React from 'react';
 import userDefaultAvatar from "../images/user-avatar.png";
 import api from "../utils/api";
 import Card from "./Card";
+import CurrentUserContext from "../contexts/CurrentUserContext";
 // import {selectors} from "../utils/constants";
 
 function Main(props) {
     //можно сделать деструктуризацию (function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }){})
-    const [userAvatar, setUserAvatar] = React.useState('');
-    const [userName, setUserName] = React.useState('');
-    const [userDescription, setUserDescription] = React.useState('');
+    const currentUser = React.useContext(CurrentUserContext);
     const [cards, setCards] = React.useState([]);
-
-    React.useEffect(() => {
-        api
-            .getUserData()
-            .then(data => {
-                setUserAvatar(data.avatar);
-                setUserName(data.name);
-                setUserDescription(data.about);
-            })
-            .catch(err => {
-                console.log(`Ошибка: ${err}`);
-            });
-    }, []);
 
     React.useEffect(() => {
         api
@@ -43,7 +29,7 @@ function Main(props) {
 
                     <div className="profile__avatar">
                         <div className="profile__avatar-img"
-                             style={{backgroundImage: `url(${userAvatar || userDefaultAvatar})`}}>
+                             style={{backgroundImage: `url(${currentUser.avatar || userDefaultAvatar})`}}>
                         </div>
                     </div>
 
@@ -54,13 +40,13 @@ function Main(props) {
                     />
 
                     <div className="profile__info">
-                        <h1 className="profile__title">{userName}</h1>
+                        <h1 className="profile__title">{currentUser.name}</h1>
                         <button className="profile__edit-button"
                                 type="button"
                                 aria-label="Редактировать профиль"
                                 onClick={props.onEditProfile}
                         />
-                        <p className="profile__description">{userDescription}</p>
+                        <p className="profile__description">{currentUser.about}</p>
                     </div>
 
                 </div>
