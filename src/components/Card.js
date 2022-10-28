@@ -1,7 +1,20 @@
 import React from 'react';
+import CurrentUserContext from "../contexts/CurrentUserContext";
 
+//можно сделать деструктуризацию (function Card({ card, onClose }){})
 function Card(props) {
-    //можно сделать деструктуризацию (function Card({ card, onClose }){})
+    const currentUser = React.useContext(CurrentUserContext);
+    // Определяем, являемся ли мы владельцем текущей карточки
+    const isOwner = props.card.owner._id === currentUser._id;
+    // Создаём переменную, которую после зададим в `className` для кнопки удаления
+    const cardDeleteButtonClassName = "element__del-button";
+    // Определяем, есть ли у карточки лайк, поставленный текущим пользователем
+    const isLiked = props.card.likes.some(i => i._id === currentUser._id);
+    // Создаём переменную, которую после зададим в `className` для кнопки лайка
+    const cardLikeButtonClassName = (
+        `element__like-button ${isLiked ? 'element__like-button_active' : ''}`
+    );
+
     function handleCardClick() {
         props.onCardClick(props.card);
     }
@@ -16,7 +29,7 @@ function Card(props) {
             <div className="element__wrapper">
                 <h2 className="element__title">{props.card.name}</h2>
                 <div className="element__likes">
-                    <button className="element__like-button"
+                    <button className={cardLikeButtonClassName}
                             type="button"
                             aria-label="Нравится">
                     </button>
@@ -25,10 +38,11 @@ function Card(props) {
                                         </span>
                 </div>
             </div>
-            <button className="element__del-button"
-                    type="button"
-                    aria-label="Удалить">
-            </button>
+            {isOwner && <button className={cardDeleteButtonClassName}
+                                type="button"
+                                aria-label="Удалить"
+                        />
+            }
         </li>
     );
 }

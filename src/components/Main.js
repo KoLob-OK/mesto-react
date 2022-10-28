@@ -3,10 +3,9 @@ import userDefaultAvatar from "../images/user-avatar.png";
 import api from "../utils/api";
 import Card from "./Card";
 import CurrentUserContext from "../contexts/CurrentUserContext";
-// import {selectors} from "../utils/constants";
 
+//можно сделать деструктуризацию (function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }){})
 function Main(props) {
-    //можно сделать деструктуризацию (function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }){})
     const currentUser = React.useContext(CurrentUserContext);
     const [cards, setCards] = React.useState([]);
 
