@@ -24,11 +24,22 @@ function Main(props) {
         // Проверяем, есть ли уже лайк на этой карточке
         const isLiked = card.likes.some(i => i._id === currentUser._id);
 
-        // Отправляем запрос в API и получаем обновлённые данные карточки
         api
             .changeLikeCardStatus(card._id, !isLiked)
             .then((newCard) => {
                 setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+            })
+            .catch(err => {
+                console.log(`Ошибка: ${err}`);
+            });
+    }
+
+    function handleCardDelete(cardID) {
+
+        api
+            .delCard(cardID)
+            .then(() => {
+                setCards((state) => state.filter((card) => card._id !== cardID));
             })
             .catch(err => {
                 console.log(`Ошибка: ${err}`);
@@ -80,6 +91,7 @@ function Main(props) {
                                 card={card}
                                 onCardClick={props.onCardClick}
                                 onCardLike={handleCardLike}
+                                onCardDelete = {handleCardDelete}
                             />
                         )
                     })}
