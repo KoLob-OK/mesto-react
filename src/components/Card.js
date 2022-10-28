@@ -1,7 +1,7 @@
 import React from 'react';
 import CurrentUserContext from "../contexts/CurrentUserContext";
 
-//можно сделать деструктуризацию (function Card({ card, onCardClick, onCardLike }){})
+//можно сделать деструктуризацию (function Card({ card, onCardClick, onCardLike, onCardDelete }){})
 function Card(props) {
     const currentUser = React.useContext(CurrentUserContext);
     // Определяем, являемся ли мы владельцем текущей карточки
@@ -21,6 +21,10 @@ function Card(props) {
 
     function handleLikeClick() {
         props.onCardLike(props.card);
+    }
+
+    function handleDeleteClick() {
+        props.onCardDelete(props.card._id);
     }
 
     return (
@@ -46,6 +50,7 @@ function Card(props) {
             {isOwner && <button className={cardDeleteButtonClassName}
                                 type="button"
                                 aria-label="Удалить"
+                                onClick={handleDeleteClick}
                         />
             }
         </li>
