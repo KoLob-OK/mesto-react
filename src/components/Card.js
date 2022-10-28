@@ -1,7 +1,7 @@
 import React from 'react';
 import CurrentUserContext from "../contexts/CurrentUserContext";
 
-//можно сделать деструктуризацию (function Card({ card, onClose }){})
+//можно сделать деструктуризацию (function Card({ card, onCardClick, onCardLike }){})
 function Card(props) {
     const currentUser = React.useContext(CurrentUserContext);
     // Определяем, являемся ли мы владельцем текущей карточки
@@ -19,6 +19,10 @@ function Card(props) {
         props.onCardClick(props.card);
     }
 
+    function handleLikeClick() {
+        props.onCardLike(props.card);
+    }
+
     return (
         <li className="element">
             <div className="element__image"
@@ -31,8 +35,9 @@ function Card(props) {
                 <div className="element__likes">
                     <button className={cardLikeButtonClassName}
                             type="button"
-                            aria-label="Нравится">
-                    </button>
+                            aria-label="Нравится"
+                            onClick={handleLikeClick}
+                    />
                     <span className="element__likes-counter">
                                             {props.card.likes.length}
                                         </span>
