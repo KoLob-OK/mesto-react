@@ -1,8 +1,8 @@
 import React from 'react';
-import userDefaultAvatar from "../images/user-avatar.png";
-import api from "../utils/api";
-import Card from "./Card";
-import CurrentUserContext from "../contexts/CurrentUserContext";
+import userDefaultAvatar from '../images/user-avatar.png';
+import api from '../utils/api';
+import Card from './Card';
+import CurrentUserContext from '../contexts/CurrentUserContext';
 
 //можно сделать деструктуризацию (function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }){})
 function Main(props) {
@@ -16,7 +16,7 @@ function Main(props) {
                 setCards(data);
             })
             .catch(err => {
-                console.log(`Ошибка: ${err}`);
+                console.log(`Ошибка загрузки картинок: ${err}`);
             });
     }, []);
 
@@ -30,7 +30,7 @@ function Main(props) {
                 setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
             })
             .catch(err => {
-                console.log(`Ошибка: ${err}`);
+                console.log(`Произошла ошибка при изменении лайка: ${err}`);
             });
     }
 
@@ -42,7 +42,7 @@ function Main(props) {
                 setCards((state) => state.filter((card) => card._id !== cardID));
             })
             .catch(err => {
-                console.log(`Ошибка: ${err}`);
+                console.log(`Произошла ошибка при удалении картинки: ${err}`);
             });
     }
 

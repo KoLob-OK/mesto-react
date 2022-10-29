@@ -2,10 +2,11 @@ import React from 'react';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
-import PopupWithForm from "./PopupWithForm";
-import ImagePopup from "./ImagePopup";
-import CurrentUserContext from "../contexts/CurrentUserContext";
-import api from "../utils/api";
+import PopupWithForm from './PopupWithForm';
+import ImagePopup from './ImagePopup';
+import EditProfilePopup from './EditProfilePopup';
+import CurrentUserContext from '../contexts/CurrentUserContext';
+import api from '../utils/api';
 
 
 function App() {
@@ -97,42 +98,10 @@ function App() {
                 </PopupWithForm>
 
                 /попап редактирования профиля-->
-                <PopupWithForm
-                    name="profile-edit"
-                    title="Редактировать профиль"
+                <EditProfilePopup
                     isOpen={isEditProfilePopupOpen}
-                    onClose={closeAllPopups}>
-                    <fieldset className="form__set">
-                        <input
-                            className="form__input form__input_type_username"
-                            type="text"
-                            name="username"
-                            id="username"
-                            placeholder="Имя"
-                            minLength="2"
-                            maxLength="40"
-                            value=""
-                            required
-                        />
-                        <span id="username-error" className="form__input-error"/>
-
-                        <input
-                            className="form__input form__input_type_job"
-                            type="text"
-                            name="job"
-                            id="job"
-                            placeholder="О себе"
-                            minLength="2"
-                            maxLength="200"
-                            value=""
-                            required
-                        />
-                        <span id="job-error" className="form__input-error"/>
-
-                        <button className="form__submit" type="submit">Сохранить</button>
-
-                    </fieldset>
-                </PopupWithForm>
+                    onClose={closeAllPopups}
+                />
 
                 /попап обновления аватара профиля-->
                 <PopupWithForm
