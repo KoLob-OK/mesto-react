@@ -1,10 +1,20 @@
 import React from 'react';
 import PopupWithForm from './PopupWithForm';
+import CurrentUserContext from '../contexts/CurrentUserContext';
 
 //можно сделать деструктуризацию (function EditProfilePopup({ isOpen, onClose }){})
 function EditProfilePopup(props) {
+    // Подписка на контекст
+    const currentUser = React.useContext(CurrentUserContext);
     const [name, setName] = React.useState('');
     const [description, setDescription] = React.useState('');
+
+    // После загрузки текущего пользователя из API
+    // его данные будут использованы в управляемых компонентах.
+    React.useEffect(() => {
+        setName(currentUser.name);
+        setDescription(currentUser.about);
+    }, [currentUser]);
 
     function handleNameChange(e) {
         setName(e.target.value);
