@@ -2,7 +2,7 @@ import React from 'react';
 import PopupWithForm from './PopupWithForm';
 import CurrentUserContext from '../contexts/CurrentUserContext';
 
-//можно сделать деструктуризацию (function EditProfilePopup({ isOpen, onClose }){})
+//можно сделать деструктуризацию (function EditProfilePopup({ isOpen, onClose, onUpdateUser }){})
 function EditProfilePopup(props) {
     // Подписка на контекст
     const currentUser = React.useContext(CurrentUserContext);
@@ -24,12 +24,24 @@ function EditProfilePopup(props) {
         setDescription(e.target.value);
     }
 
+    function handleSubmit(e) {
+        // Запрещаем браузеру переходить по адресу формы
+        e.preventDefault();
+
+        // Передаём значения управляемых компонентов во внешний обработчик
+        props.onUpdateUser({
+            username: name,
+            job: description
+        });
+    }
+
     return (
         <PopupWithForm
             name="profile-edit"
             title="Редактировать профиль"
             isOpen={props.isOpen}
-            onClose={props.onClose}>
+            onClose={props.onClose}
+            onSubmit={handleSubmit}>
             <fieldset className="form__set">
                 <input
                     className="form__input form__input_type_username"

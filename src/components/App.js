@@ -50,6 +50,18 @@ function App() {
         setSelectedCard({});
     }
 
+    function handleUpdateUser(userData) {
+        api
+            .changeUserData(userData)
+            .then((newData) => {
+                setCurrentUser(newData);
+                closeAllPopups();
+            })
+            .catch(err => {
+                console.log(`Произошла ошибка при изменении данных пользователя: ${err}`);
+            });
+    }
+
     return (
         <CurrentUserContext.Provider value={currentUser}>
             <div className="page">
@@ -101,6 +113,7 @@ function App() {
                 <EditProfilePopup
                     isOpen={isEditProfilePopupOpen}
                     onClose={closeAllPopups}
+                    onUpdateUser={handleUpdateUser}
                 />
 
                 /попап обновления аватара профиля-->

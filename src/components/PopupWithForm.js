@@ -1,6 +1,6 @@
 import React from 'react';
 
-//можно сделать деструктуризацию (function PopupWithForm({ name, title, children, isOpen, onClose }){})
+//можно сделать деструктуризацию (function PopupWithForm({ name, title, children, isOpen, onClose, onSubmit }){})
 function PopupWithForm(props) {
     return (
         <div className={`popup popup_type_${props.name} ${props.isOpen ? "popup_opened" : ""}`}>
@@ -14,6 +14,7 @@ function PopupWithForm(props) {
                 <form name={`${props.name}-form`}
                       action="#"
                       className="form popup__form"
+                      onSubmit={props.onSubmit}
                       noValidate>
                 {props.children}
                 </form>
