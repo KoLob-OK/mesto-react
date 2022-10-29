@@ -6,24 +6,27 @@ import CurrentUserContext from '../contexts/CurrentUserContext';
 function EditProfilePopup(props) {
     // Подписка на контекст
     const currentUser = React.useContext(CurrentUserContext);
+
     const [name, setName] = React.useState('');
     const [description, setDescription] = React.useState('');
 
-    // После загрузки текущего пользователя из API
-    // его данные будут использованы в управляемых компонентах.
+    // После загрузки текущего пользователя из API его данные будут использованы в управляемых компонентах.
     React.useEffect(() => {
         setName(currentUser.name);
         setDescription(currentUser.about);
     }, [currentUser]);
 
+    // Обработчик имени
     function handleNameChange(e) {
         setName(e.target.value);
     }
 
+    // Обработчик профессии
     function handleDescriptionChange(e) {
         setDescription(e.target.value);
     }
 
+    // Обработчик сабмита формы
     function handleSubmit(e) {
         // Запрещаем браузеру переходить по адресу формы
         e.preventDefault();

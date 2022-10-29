@@ -15,14 +15,17 @@ function Card(props) {
         `element__like-button ${isLiked ? 'element__like-button_active' : ''}`
     );
 
+    // Обработчик клика по картинке
     function handleCardClick() {
         props.onCardClick(props.card);
     }
 
+    // Обработчик клика лайка
     function handleLikeClick() {
         props.onCardLike(props.card);
     }
 
+    // Обработчик клика корзины
     function handleDeleteClick() {
         props.onCardDelete(props.card._id);
     }

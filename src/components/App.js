@@ -24,26 +24,31 @@ function App() {
                 setCurrentUser(data);
             })
             .catch(err => {
-                console.log(`Ошибка: ${err}`);
+                console.log(`Произошла ошибка при загрузке данных пользователя: ${err}`);
             });
     }, []);
 
+    // Обработчик клика аватара
     function handleEditAvatarClick() {
         setIsEditAvatarPopupOpen(true);
     }
 
+    // Обработчик клика кнопки редактирования профиля
     function handleEditProfileClick() {
         setIsEditProfilePopupOpen(true);
     }
 
+    // Обработчик клика кнопки "+"
     function handleAddPlaceClick() {
         setIsAddPlacePopupOpen(true);
     }
 
+    // Обработчик клика по картинке
     function handleCardClick(card) {
         setSelectedCard(card);
     }
 
+    // Функция закрытия попапов
     function closeAllPopups() {
         setIsEditAvatarPopupOpen(false);
         setIsEditProfilePopupOpen(false);
@@ -51,15 +56,29 @@ function App() {
         setSelectedCard({});
     }
 
+    // Обработчик отправки данных пользователя
     function handleUpdateUser(userData) {
         api
             .changeUserData(userData)
-            .then((newData) => {
+            .then(newData => {
                 setCurrentUser(newData);
                 closeAllPopups();
             })
             .catch(err => {
                 console.log(`Произошла ошибка при изменении данных пользователя: ${err}`);
+            });
+    }
+
+    // Обработчик отправки данных аватара
+    function handleUpdateAvatar(userAvatar) {
+        api
+            .updateAvatar(userAvatar)
+            .then(newData => {
+                setCurrentUser(newData);
+                closeAllPopups();
+            })
+            .catch(err => {
+                console.log(`Произошла ошибка при обновлении аватара: ${err}`);
             });
     }
 
@@ -121,6 +140,7 @@ function App() {
                 <EditAvatarPopup
                     isOpen={isEditAvatarPopupOpen}
                     onClose={closeAllPopups}
+                    onUpdateAvatar={handleUpdateAvatar}
                 />
 
                 /попап подтверждения удаления карточки-->

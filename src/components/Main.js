@@ -9,6 +9,7 @@ function Main(props) {
     const currentUser = React.useContext(CurrentUserContext);
     const [cards, setCards] = React.useState([]);
 
+    // Используем эффект для получения массива с карточками
     React.useEffect(() => {
         api
             .getInitialCards()
@@ -20,26 +21,32 @@ function Main(props) {
             });
     }, []);
 
+    // Функция-обработчик изменения лайка
     function handleCardLike(card) {
-        // Проверяем, есть ли уже лайк на этой карточке
+        // Объявляем переменную "Есть Лайк" (isLiked) - проверяем, есть ли уже мой лайк на этой карточке
         const isLiked = card.likes.some(i => i._id === currentUser._id);
 
+        // Делаем запрос на сервер
         api
             .changeLikeCardStatus(card._id, !isLiked)
             .then((newCard) => {
-                setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+                // Перебором по массиву методом map проверяем, есть ли лайк у карточки
+                // (если id карточки в стейте (card) точно равен id карточки из массива c сервера (newCard),
+                // то лайк есть, создаем newCard... иначе следующая карточка без лайка)
+                setCards((cards) => cards.map((card) => card._id === newCard._id ? newCard : card));
             })
             .catch(err => {
                 console.log(`Произошла ошибка при изменении лайка: ${err}`);
             });
     }
 
+    // Функция-обработчик удаления карточки
     function handleCardDelete(cardID) {
 
         api
             .delCard(cardID)
             .then(() => {
-                setCards((state) => state.filter((card) => card._id !== cardID));
+                setCards((cards) => cards.filter((card) => card._id !== cardID));
             })
             .catch(err => {
                 console.log(`Произошла ошибка при удалении картинки: ${err}`);
