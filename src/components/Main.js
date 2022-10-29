@@ -4,8 +4,7 @@ import api from '../utils/api';
 import Card from './Card';
 import CurrentUserContext from '../contexts/CurrentUserContext';
 
-//можно сделать деструктуризацию (function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }){})
-function Main(props) {
+function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
     const currentUser = React.useContext(CurrentUserContext);
     const [cards, setCards] = React.useState([]);
 
@@ -68,7 +67,7 @@ function Main(props) {
                     <button className="profile__avatar-button"
                             type="button"
                             aria-label="Обновить аватар"
-                            onClick={props.onEditAvatar}
+                            onClick={onEditAvatar}
                     />
 
                     <div className="profile__info">
@@ -76,7 +75,7 @@ function Main(props) {
                         <button className="profile__edit-button"
                                 type="button"
                                 aria-label="Редактировать профиль"
-                                onClick={props.onEditProfile}
+                                onClick={onEditProfile}
                         />
                         <p className="profile__description">{currentUser.about}</p>
                     </div>
@@ -85,7 +84,7 @@ function Main(props) {
                 <button className="profile__add-button"
                         type="button"
                         aria-label="Добавить фото"
-                        onClick={props.onAddPlace}
+                        onClick={onAddPlace}
                 />
             </section>
 
@@ -96,7 +95,7 @@ function Main(props) {
                             <Card
                                 key={card._id}
                                 card={card}
-                                onCardClick={props.onCardClick}
+                                onCardClick={onCardClick}
                                 onCardLike={handleCardLike}
                                 onCardDelete = {handleCardDelete}
                             />

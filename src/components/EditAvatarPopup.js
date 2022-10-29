@@ -1,15 +1,14 @@
 import React from 'react';
 import PopupWithForm from "./PopupWithForm";
 
-//можно сделать деструктуризацию (function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }){})
-function EditAvatarPopup(props) {
+function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
     // Используем реф для получения прямого доступа к DOM-элементу инпута и его значению
     const refAvatarInput = React.useRef();
 
     // Обработчик сабмита формы
     function handleSubmit(e) {
         e.preventDefault();
-        props.onUpdateAvatar({
+        onUpdateAvatar({
             avatar: refAvatarInput.current.value
         });
     }
@@ -18,8 +17,8 @@ function EditAvatarPopup(props) {
         <PopupWithForm
             name="update-avatar"
             title="Обновить аватар"
-            isOpen={props.isOpen}
-            onClose={props.onClose}
+            isOpen={isOpen}
+            onClose={onClose}
             onSubmit={handleSubmit}>
             <fieldset className="form__set">
                 <input

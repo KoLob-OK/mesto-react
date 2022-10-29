@@ -1,15 +1,14 @@
 import React from 'react';
 import CurrentUserContext from '../contexts/CurrentUserContext';
 
-//можно сделать деструктуризацию (function Card({ card, onCardClick, onCardLike, onCardDelete }){})
-function Card(props) {
+function Card({ card, onCardClick, onCardLike, onCardDelete }) {
     const currentUser = React.useContext(CurrentUserContext);
     // Определяем, являемся ли мы владельцем текущей карточки
-    const isOwner = props.card.owner._id === currentUser._id;
+    const isOwner = card.owner._id === currentUser._id;
     // Создаём переменную, которую после зададим в `className` для кнопки удаления
     const cardDeleteButtonClassName = "element__del-button";
     // Определяем, есть ли у карточки лайк, поставленный текущим пользователем
-    const isLiked = props.card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some(i => i._id === currentUser._id);
     // Создаём переменную, которую после зададим в `className` для кнопки лайка
     const cardLikeButtonClassName = (
         `element__like-button ${isLiked ? 'element__like-button_active' : ''}`
@@ -17,28 +16,28 @@ function Card(props) {
 
     // Обработчик клика по картинке
     function handleCardClick() {
-        props.onCardClick(props.card);
+        onCardClick(card);
     }
 
     // Обработчик клика лайка
     function handleLikeClick() {
-        props.onCardLike(props.card);
+        onCardLike(card);
     }
 
     // Обработчик клика корзины
     function handleDeleteClick() {
-        props.onCardDelete(props.card._id);
+        onCardDelete(card._id);
     }
 
     return (
         <li className="element">
             <div className="element__image"
-                 style={{backgroundImage: `url(${props.card.link})`}}
-                 alt={props.card.name}
+                 style={{backgroundImage: `url(${card.link})`}}
+                 alt={card.name}
                  onClick={handleCardClick}>
             </div>
             <div className="element__wrapper">
-                <h2 className="element__title">{props.card.name}</h2>
+                <h2 className="element__title">{card.name}</h2>
                 <div className="element__likes">
                     <button className={cardLikeButtonClassName}
                             type="button"
@@ -46,7 +45,7 @@ function Card(props) {
                             onClick={handleLikeClick}
                     />
                     <span className="element__likes-counter">
-                                            {props.card.likes.length}
+                                            {card.likes.length}
                                         </span>
                 </div>
             </div>
