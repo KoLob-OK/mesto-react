@@ -15,7 +15,7 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
     );
 
     // Обработчик клика по картинке
-    function handleCardClick() {
+    function handleClick() {
         onCardClick(card);
     }
 
@@ -34,7 +34,7 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
             <div className="element__image"
                  style={{backgroundImage: `url(${card.link})`}}
                  alt={card.name}
-                 onClick={handleCardClick}>
+                 onClick={handleClick}>
             </div>
             <div className="element__wrapper">
                 <h2 className="element__title">{card.name}</h2>
