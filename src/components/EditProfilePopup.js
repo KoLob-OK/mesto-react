@@ -55,7 +55,9 @@ function EditProfilePopup(props) {
                     onChange={handleNameChange}
                     required
                 />
-                <span id="username-error" className="form__input-error"/>
+                <span id="username-error"
+                      className="form__input-error"
+                />
 
                 <input
                     className="form__input form__input_type_job"
@@ -69,7 +71,9 @@ function EditProfilePopup(props) {
                     onChange={handleDescriptionChange}
                     required
                 />
-                <span id="job-error" className="form__input-error"/>
+                <span id="job-error"
+                      className="form__input-error"
+                />
 
                 <button className="form__submit"
                         type="submit">

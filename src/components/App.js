@@ -5,6 +5,7 @@ import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 import EditProfilePopup from './EditProfilePopup';
+import EditAvatarPopup from './EditAvatarPopup';
 import CurrentUserContext from '../contexts/CurrentUserContext';
 import api from '../utils/api';
 
@@ -117,25 +118,10 @@ function App() {
                 />
 
                 /попап обновления аватара профиля-->
-                <PopupWithForm
-                    name="update-avatar"
-                    title="Обновить аватар"
+                <EditAvatarPopup
                     isOpen={isEditAvatarPopupOpen}
-                    onClose={closeAllPopups}>
-                    <fieldset className="form__set">
-                        <input
-                            className="form__input form__input_type_avatar"
-                            type="url"
-                            name="avatar"
-                            id="avatar"
-                            placeholder="Ссылка на картинку"
-                            value=""
-                            required
-                        />
-                        <span id="avatar-error" className="form__input-error"/>
-                        <button className="form__submit" type="submit">Сохранить</button>
-                    </fieldset>
-                </PopupWithForm>
+                    onClose={closeAllPopups}
+                />
 
                 /попап подтверждения удаления карточки-->
                 <PopupWithForm
