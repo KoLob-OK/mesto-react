@@ -3,6 +3,16 @@ import PopupWithForm from './PopupWithForm';
 
 //можно сделать деструктуризацию (function EditProfilePopup({ isOpen, onClose }){})
 function EditProfilePopup(props) {
+    const [name, setName] = React.useState('');
+    const [description, setDescription] = React.useState('');
+
+    function handleNameChange(e) {
+        setName(e.target.value);
+    }
+
+    function handleDescriptionChange(e) {
+        setDescription(e.target.value);
+    }
 
     return (
         <PopupWithForm
@@ -19,7 +29,8 @@ function EditProfilePopup(props) {
                     placeholder="Имя"
                     minLength="2"
                     maxLength="40"
-                    value=""
+                    value={name ?? ''}
+                    onChange={handleNameChange}
                     required
                 />
                 <span id="username-error" className="form__input-error"/>
@@ -32,7 +43,8 @@ function EditProfilePopup(props) {
                     placeholder="О себе"
                     minLength="2"
                     maxLength="200"
-                    value=""
+                    value={description ?? ''}
+                    onChange={handleDescriptionChange}
                     required
                 />
                 <span id="job-error" className="form__input-error"/>
