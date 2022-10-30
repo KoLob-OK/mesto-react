@@ -1,9 +1,10 @@
-import React from 'react';
+import { useContext } from 'react';
+
 import CurrentUserContext from '../contexts/CurrentUserContext';
 
 function Card({ card, onCardClick, onCardLike, onCardDelete }) {
     // Текущий пользователь
-    const currentUser = React.useContext(CurrentUserContext);
+    const currentUser = useContext(CurrentUserContext);
     // Определяем, являемся ли мы владельцем текущей карточки
     const isOwner = card.owner._id === currentUser._id;
     // Создаём переменную, которую после зададим в `className` для кнопки удаления

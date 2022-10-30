@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 
 import Header from './Header';
 import Main from './Main';
@@ -15,23 +15,22 @@ import api from '../utils/api';
 
 function App() {
     // Задаем переменную состояния попапов
-    const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
-    const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
-    const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+    const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
+    const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
+    const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
     // Задаем выбранную для просмотра карточку
-    const [selectedCard, setSelectedCard] = React.useState({});
+    const [selectedCard, setSelectedCard] = useState({});
     // Задаем выбранную для удаления карточку
-    const [selectedForDelCard, setSelectedForDelCard] = React.useState(false);
+    const [selectedForDelCard, setSelectedForDelCard] = useState(false);
     // Текущий пользователь
-    const [currentUser, setCurrentUser] = React.useState({});
+    const [currentUser, setCurrentUser] = useState({});
     // Массив карточек
-    const [cards, setCards] = React.useState([]);
+    const [cards, setCards] = useState([]);
     // Загружается
-    const [isLoading, setIsLoading] = React.useState(false);
-
+    const [isLoading, setIsLoading] = useState(false);
 
     // Используем эффект для получения массива с начальными карточками и данных пользователя
-    React.useEffect(() => {
+    useEffect(() => {
         api
             .getInitialCards()
             .then(initialCards => {

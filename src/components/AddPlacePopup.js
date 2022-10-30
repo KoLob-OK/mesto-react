@@ -1,16 +1,17 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
+
 import PopupWithForm from './PopupWithForm';
 
 function AddPlacePopup({ isOpen, onClose, onAddPlace, onLoading }) {
     // Используем управляемые компоненты для получения значений инпутов
-    const [name, setName] = React.useState('');
-    const [link, setLink] = React.useState('');
+    const [name, setName] = useState('');
+    const [link, setLink] = useState('');
 
-    //Сброс полей инпутов при закрытии попапа
-    React.useEffect(() => {
+    //Сброс полей инпутов при открытии попапа
+    useEffect(() => {
         setName('');
         setLink('');
-    }, [onClose]);
+    }, [isOpen]);
 
     // Обработчик названия карточки
     function handleNameChange(e) {

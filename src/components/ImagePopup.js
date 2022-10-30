@@ -1,6 +1,3 @@
-import React from 'react';
-
-//можно сделать деструктуризацию (function ImagePopup({card, onClose}){})
 function ImagePopup({ card, onClose }) {
     return (
         <div className={`popup popup_type_expand-image ${card.link ? "popup_opened" : ""}`}>

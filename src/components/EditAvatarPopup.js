@@ -1,14 +1,14 @@
-import React from 'react';
+import { useEffect, useRef } from 'react';
 import PopupWithForm from './PopupWithForm';
 
 function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar, onLoading }) {
     // Используем реф для получения прямого доступа к DOM-элементу инпута и его значению
-    const refAvatarInput = React.useRef();
+    const refAvatarInput = useRef();
 
-    //Сброс полей инпутов при закрытии попапа
-    React.useEffect(() => {
+    //Сброс полей инпутов при открытии попапа
+    useEffect(() => {
         refAvatarInput.current.value = '';
-    }, [onClose]);
+    }, [isOpen]);
 
     // Обработчик сабмита формы
     function handleSubmit(e) {
