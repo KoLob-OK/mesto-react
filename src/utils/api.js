@@ -1,10 +1,12 @@
 export class Api {
     constructor(options) {
+        // baseUrl - базовая часть url-адреса запроса
         this._baseUrl = options.baseUrl;
+        // headers - заголовки запроса
         this._headers = options.headers;
     }
 
-    // метод проверки статуса ответа
+    // Метод проверки статуса ответа
     _checkResponse(res) {
         if (res.ok) {
             return res.json();
@@ -13,7 +15,9 @@ export class Api {
         return Promise.reject(`Ошибка: ${res.status}`) //ПРОМИС - ОБЕЩАНИЕ
     }
 
-    // метод получения initialCards с сервера
+    // Метод получения initialCards с сервера
+    // получает начальные карточки с сервера и
+    // возвращает промис {Promise} - массив карточек
     getInitialCards() {
         return fetch(`${this._baseUrl}/cards`, {
             method: 'GET',
@@ -24,7 +28,9 @@ export class Api {
             });
     }
 
-    // метол получения данных пользователя с сервера
+    // Метод получения данных пользователя с сервера
+    // получает данные текущего пользователя и
+    // возвращает промис {Promise} - объект текущего пользователя
     getUserData() {
         return fetch(`${this._baseUrl}/users/me`, {
             method: 'GET',
@@ -35,14 +41,15 @@ export class Api {
             });
     }
 
-    // метод добавления карточки //card
-    addCard(card) {
+    // Метод добавления новой карточки card (имеет 2 параметра: name-имя, link-ссылка)
+    // возвращает промис {Promise} - объект новой карточки
+    addCard({ name, link }) {
         return fetch(`${this._baseUrl}/cards`, {
             method: 'POST',
             headers: this._headers,
             body: JSON.stringify({
-                name: card.name,
-                link: card.link
+                name,
+                link
             })
         })
             .then(res => {
@@ -50,7 +57,8 @@ export class Api {
             });
     }
 
-    // метод удаления карточки
+    // Метод удаления карточки с идентификатором cardID
+    // возвращает промис {Promise} - ответ с сервера
     delCard(cardID) {
         return fetch(`${this._baseUrl}/cards/${cardID}`, {
             method: 'DELETE',
@@ -61,7 +69,8 @@ export class Api {
             });
     }
 
-    // метод изменения лайка карточки
+    // Метод изменения лайка карточки (имеет 2 свойства: cardID-идентификатор, isLiked-статус)
+    // возвращает промис {Promise} - массив новых лайков
     changeLikeCardStatus(cardID, isLiked) {
         return fetch(`${this._baseUrl}/cards/${cardID}/likes`, {
             method: `${!isLiked ? 'DELETE' : 'PUT'}`,
@@ -72,38 +81,15 @@ export class Api {
             });
     }
 
-    // метод добавления лайка карточке
-    /*        setLikeCard(cardID)
-            {
-                return fetch(`${this._baseUrl}/cards/${cardID}/likes`, {
-                    method: 'PUT',
-                    headers: this._headers
-                })
-                    .then(res => {
-                        return this._checkResponse(res)
-                    });
-            }*/
-
-    /*  // метод удаления лайка у карточки
-      delLikeCard(cardID) {
-        return fetch(`${this._baseUrl}/cards/${cardID}/likes`, {
-          method: 'DELETE',
-          headers: this._headers
-        })
-          .then(res => {
-            return this._checkResponse(res)
-          });
-      }*/
-
-
-    // метод изменения данных пользователя
-    changeUserData(data) {
+    // Метод изменения данных пользователя data (имеет 2 параметра: username-имя, job-профессия)
+    // возвращает промис {Promise} - новый объект пользователя
+    changeUserData({ username, job }) {
         return fetch(`${this._baseUrl}/users/me`, {
             method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify({
-                name: data.username,
-                about: data.job
+                name: username,
+                about: job
             })
         })
             .then(res => {
@@ -111,13 +97,14 @@ export class Api {
             });
     }
 
-    // метод обновления аватара пользователя
-    updateAvatar(data) {
+    // Метод обновления аватара пользователя (avatar-ссылка на изображение)
+    // возвращает промис {Promise} - новый аватар
+    updateAvatar({ avatar }) {
         return fetch(`${this._baseUrl}/users/me/avatar`, {
             method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify({
-                avatar: data.avatar
+                avatar: avatar
             })
         })
             .then(res => {

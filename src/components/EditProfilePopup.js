@@ -9,11 +9,11 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
     const [name, setName] = React.useState('');
     const [description, setDescription] = React.useState('');
 
-    //Сброс полей инпутов при закрытии попапа (текущий пользователь)
+    //Сброс полей инпутов при открытии попапа (текущий пользователь)
     React.useEffect(() => {
         setName(currentUser.name);
         setDescription(currentUser.about);
-    }, [currentUser, onClose]);
+    }, [currentUser, isOpen]);
 
     // После загрузки текущего пользователя из API его данные будут использованы в управляемых компонентах.
     React.useEffect(() => {

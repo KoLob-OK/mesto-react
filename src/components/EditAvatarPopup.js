@@ -1,5 +1,5 @@
 import React from 'react';
-import PopupWithForm from "./PopupWithForm";
+import PopupWithForm from './PopupWithForm';
 
 function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
     // Используем реф для получения прямого доступа к DOM-элементу инпута и его значению
