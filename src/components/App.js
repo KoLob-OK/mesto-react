@@ -157,6 +157,7 @@ function App() {
 
     // Функция-обработчик подтверждения удаления карточки
     function handleConfirmDel() {
+        setIsLoading(true);
         api
             .delCard(selectedForDelCard)
             .then(() => {
@@ -165,6 +166,9 @@ function App() {
             })
             .catch(err => {
                 console.log(`Произошла ошибка при удалении картинки: ${err}`);
+            })
+            .finally(() => {
+                setIsLoading(false);
             });
     }
 
@@ -212,6 +216,7 @@ function App() {
                     card={selectedForDelCard}
                     onClose={closeAllPopups}
                     onConfirm={handleConfirmDel}
+                    onLoading={isLoading}
                 />
 
                 /попап просмотра фото-->

@@ -1,7 +1,7 @@
 import React from 'react';
 import PopupWithForm from './PopupWithForm';
 
-function DelConfirmPopup({ card, onClose, onConfirm }) {
+function DelConfirmPopup({ card, onClose, onConfirm, onLoading }) {
     // Обработчик сабмита формы
     function handleSubmit(e) {
         e.preventDefault();
@@ -17,7 +17,7 @@ function DelConfirmPopup({ card, onClose, onConfirm }) {
             onSubmit={handleSubmit}>
             <button className="form__submit"
                     type="submit">
-                Да
+                {onLoading ? "Сохранение..." : "Да"}
             </button>
         </PopupWithForm>
     )
