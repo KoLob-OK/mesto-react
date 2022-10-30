@@ -6,6 +6,12 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
     const [name, setName] = React.useState('');
     const [link, setLink] = React.useState('');
 
+    //Сброс полей инпутов при закрытии попапа
+    React.useEffect(() => {
+        setName('');
+        setLink('');
+    }, [onClose]);
+
     // Обработчик названия карточки
     function handleNameChange(e) {
         setName(e.target.value);

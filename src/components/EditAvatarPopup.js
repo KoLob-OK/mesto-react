@@ -5,6 +5,11 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
     // Используем реф для получения прямого доступа к DOM-элементу инпута и его значению
     const refAvatarInput = React.useRef();
 
+    //Сброс полей инпутов при закрытии попапа
+    React.useEffect(() => {
+        refAvatarInput.current.value = '';
+    }, [onClose]);
+
     // Обработчик сабмита формы
     function handleSubmit(e) {
         e.preventDefault();
