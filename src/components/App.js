@@ -45,22 +45,22 @@ function App() {
     // Обработчик клика аватара
     function handleEditAvatarClick() {
         setIsEditAvatarPopupOpen(true);
-    }
+    };
 
     // Обработчик клика кнопки редактирования профиля
     function handleEditProfileClick() {
         setIsEditProfilePopupOpen(true);
-    }
+    };
 
     // Обработчик клика кнопки "+"
     function handleAddPlaceClick() {
         setIsAddPlacePopupOpen(true);
-    }
+    };
 
     // Обработчик клика по картинке
     function handleCardClick(card) {
         setSelectedCard(card);
-    }
+    };
 
     // Функция закрытия попапов
     function closeAllPopups() {
@@ -68,7 +68,7 @@ function App() {
         setIsEditProfilePopupOpen(false);
         setIsAddPlacePopupOpen(false);
         setSelectedCard({});
-    }
+    };
 
     // Обработчик отправки данных пользователя
     function handleUpdateUser(userData) {
@@ -81,7 +81,7 @@ function App() {
             .catch(err => {
                 console.log(`Произошла ошибка при изменении данных пользователя: ${err}`);
             });
-    }
+    };
 
     // Обработчик отправки данных аватара
     function handleUpdateAvatar(userAvatar) {
@@ -94,7 +94,7 @@ function App() {
             .catch(err => {
                 console.log(`Произошла ошибка при обновлении аватара: ${err}`);
             });
-    }
+    };
 
     // Функция-обработчик изменения лайка
     function handleCardLike(card) {
@@ -113,7 +113,7 @@ function App() {
             .catch(err => {
                 console.log(`Произошла ошибка при изменении лайка: ${err}`);
             });
-    }
+    };
 
     // Функция-обработчик удаления карточки
     function handleCardDelete(cardID) {
@@ -126,7 +126,20 @@ function App() {
             .catch(err => {
                 console.log(`Произошла ошибка при удалении картинки: ${err}`);
             });
-    }
+    };
+
+    // Функция-обработчик добавления карточки
+    function handleAddPlaceSubmit(newPlace) {
+        api
+            .addCard(newPlace)
+            .then((newCard) => {
+                setCards([newCard, ...cards]);
+                closeAllPopups();
+            })
+            .catch(err => {
+                console.log(`Произошла ошибка при загрузке картинки: ${err}`);
+            });
+    };
 
     return (
         <CurrentUserContext.Provider value={currentUser}>
@@ -147,6 +160,7 @@ function App() {
                 <AddPlacePopup
                     isOpen={isAddPlacePopupOpen}
                     onClose={closeAllPopups}
+                    onAddPlace={handleAddPlaceSubmit}
                 />
 
                 /попап редактирования профиля-->
