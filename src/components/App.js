@@ -16,6 +16,19 @@ function App() {
     const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
     const [selectedCard, setSelectedCard] = React.useState({});
     const [currentUser, setCurrentUser] = React.useState({});
+    const [cards, setCards] = React.useState([]);
+
+    // Используем эффект для получения массива с карточками
+    React.useEffect(() => {
+        api
+            .getInitialCards()
+            .then(data => {
+                setCards(data);
+            })
+            .catch(err => {
+                console.log(`Ошибка загрузки картинок: ${err}`);
+            });
+    }, []);
 
     React.useEffect(() => {
         api
@@ -82,15 +95,50 @@ function App() {
             });
     }
 
+    // Функция-обработчик изменения лайка
+    function handleCardLike(card) {
+        // Объявляем переменную "Есть Лайк" (isLiked) - проверяем, есть ли уже мой лайк на этой карточке
+        const isLiked = card.likes.some(i => i._id === currentUser._id);
+
+        // Делаем запрос на сервер
+        api
+            .changeLikeCardStatus(card._id, !isLiked)
+            .then((newCard) => {
+                // Перебором по массиву методом map проверяем, есть ли лайк у карточки
+                // (если id карточки в стейте (card) точно равен id карточки из массива c сервера (newCard),
+                // то лайк есть, создаем newCard... иначе следующая карточка без лайка)
+                setCards((cards) => cards.map((card) => card._id === newCard._id ? newCard : card));
+            })
+            .catch(err => {
+                console.log(`Произошла ошибка при изменении лайка: ${err}`);
+            });
+    }
+
+    // Функция-обработчик удаления карточки
+    function handleCardDelete(cardID) {
+
+        api
+            .delCard(cardID)
+            .then(() => {
+                setCards((cards) => cards.filter((card) => card._id !== cardID));
+            })
+            .catch(err => {
+                console.log(`Произошла ошибка при удалении картинки: ${err}`);
+            });
+    }
+
     return (
         <CurrentUserContext.Provider value={currentUser}>
             <div className="page">
                 <Header/>
                 <Main
+                    cards={cards}
                     onEditAvatar={handleEditAvatarClick}
                     onEditProfile={handleEditProfileClick}
                     onAddPlace={handleAddPlaceClick}
                     onCardClick={handleCardClick}
+                    onCardLike={handleCardLike}
+                    onCardDelete={handleCardDelete}
                 />
                 <Footer/>
 
