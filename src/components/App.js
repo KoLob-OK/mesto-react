@@ -26,6 +26,8 @@ function App() {
     const [currentUser, setCurrentUser] = React.useState({});
     // Массив карточек
     const [cards, setCards] = React.useState([]);
+    // Загружается
+    const [isLoading, setIsLoading] = React.useState(false);
 
 
     // Используем эффект для получения массива с начальными карточками и данных пользователя
@@ -80,6 +82,7 @@ function App() {
 
     // Обработчик отправки данных пользователя
     function handleUpdateUser(userData) {
+        setIsLoading(true);
         api
             .changeUserData(userData)
             .then(newData => {
@@ -88,11 +91,15 @@ function App() {
             })
             .catch(err => {
                 console.log(`Произошла ошибка при изменении данных пользователя: ${err}`);
+            })
+            .finally(() => {
+                setIsLoading(false);
             });
     }
 
     // Обработчик отправки данных аватара
     function handleUpdateAvatar(userAvatar) {
+        setIsLoading(true);
         api
             .updateAvatar(userAvatar)
             .then(newData => {
@@ -101,6 +108,9 @@ function App() {
             })
             .catch(err => {
                 console.log(`Произошла ошибка при обновлении аватара: ${err}`);
+            })
+            .finally(() => {
+                setIsLoading(false);
             });
     }
 
@@ -125,6 +135,7 @@ function App() {
 
     // Функция-обработчик добавления карточки
     function handleAddPlaceSubmit(newPlace) {
+        setIsLoading(true);
         api
             .addCard(newPlace)
             .then((newCard) => {
@@ -133,6 +144,9 @@ function App() {
             })
             .catch(err => {
                 console.log(`Произошла ошибка при загрузке картинки: ${err}`);
+            })
+            .finally(() => {
+                setIsLoading(false);
             });
     }
 
@@ -174,6 +188,7 @@ function App() {
                     isOpen={isAddPlacePopupOpen}
                     onClose={closeAllPopups}
                     onAddPlace={handleAddPlaceSubmit}
+                    onLoading={isLoading}
                 />
 
                 /попап редактирования профиля-->
@@ -181,6 +196,7 @@ function App() {
                     isOpen={isEditProfilePopupOpen}
                     onClose={closeAllPopups}
                     onUpdateUser={handleUpdateUser}
+                    onLoading={isLoading}
                 />
 
                 /попап обновления аватара профиля-->
@@ -188,6 +204,7 @@ function App() {
                     isOpen={isEditAvatarPopupOpen}
                     onClose={closeAllPopups}
                     onUpdateAvatar={handleUpdateAvatar}
+                    onLoading={isLoading}
                 />
 
                 /попап подтверждения удаления карточки-->

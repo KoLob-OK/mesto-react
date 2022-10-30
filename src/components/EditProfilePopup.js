@@ -2,7 +2,7 @@ import React from 'react';
 import PopupWithForm from './PopupWithForm';
 import CurrentUserContext from '../contexts/CurrentUserContext';
 
-function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
+function EditProfilePopup({ isOpen, onClose, onUpdateUser, onLoading }) {
     // Подписка на контекст
     const currentUser = React.useContext(CurrentUserContext);
 
@@ -85,7 +85,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
 
                 <button className="form__submit"
                         type="submit">
-                    Сохранить
+                    {onLoading ? "Сохранение..." : "Сохранить"}
                 </button>
 
             </fieldset>

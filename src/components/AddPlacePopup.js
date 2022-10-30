@@ -1,7 +1,7 @@
 import React from 'react';
 import PopupWithForm from './PopupWithForm';
 
-function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
+function AddPlacePopup({ isOpen, onClose, onAddPlace, onLoading }) {
     // Используем управляемые компоненты для получения значений инпутов
     const [name, setName] = React.useState('');
     const [link, setLink] = React.useState('');
@@ -70,7 +70,7 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
 
                 <button className="form__submit"
                         type="submit">
-                    Создать
+                    {onLoading ? "Сохранение..." : "Создать"}
                 </button>
 
             </fieldset>

@@ -1,7 +1,7 @@
 import React from 'react';
 import PopupWithForm from './PopupWithForm';
 
-function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
+function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar, onLoading }) {
     // Используем реф для получения прямого доступа к DOM-элементу инпута и его значению
     const refAvatarInput = React.useRef();
 
@@ -40,7 +40,7 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
                 />
                 <button className="form__submit"
                         type="submit">
-                    Сохранить
+                    {onLoading ? "Сохранение..." : "Сохранить"}
                 </button>
             </fieldset>
         </PopupWithForm>
